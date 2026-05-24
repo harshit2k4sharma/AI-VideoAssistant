@@ -1,6 +1,14 @@
+import os
+import sys
+
+# Inject local FFmpeg binaries directory into PATH for pydub and yt-dlp
+ffmpeg_dir = r"C:\Users\harsh\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1.1-full_build\bin"
+if os.path.exists(ffmpeg_dir) and ffmpeg_dir not in os.environ["PATH"]:
+    os.environ["PATH"] += os.pathsep + ffmpeg_dir
+
 import yt_dlp
 from pydub import AudioSegment
-import os
+
 
 DOWNLOAD_DIR = 'downloades'
 os.makedirs(DOWNLOAD_DIR,exist_ok = True)

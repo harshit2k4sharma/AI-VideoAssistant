@@ -1,7 +1,15 @@
-import whisper
 import os
+import sys
+
+# Inject local FFmpeg binaries directory into PATH for pydub
+ffmpeg_dir = r"C:\Users\harsh\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1.1-full_build\bin"
+if os.path.exists(ffmpeg_dir) and ffmpeg_dir not in os.environ["PATH"]:
+    os.environ["PATH"] += os.pathsep + ffmpeg_dir
+
+import whisper
 import requests
 from pydub import AudioSegment
+
 
 # Sarvam's sync STT-translate API rejects audio longer than 30s.
 # We slice each chunk into 25s pieces (with a 5s safety margin) before sending.
